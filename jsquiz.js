@@ -1,8 +1,5 @@
 //create key obj with two key value pairs
-var tree = {
-  height: "",
-  sym: ""
-};
+var tree = { };
 
 //create variable to store input elements
 var inputHeight = document.getElementById('height');
@@ -13,11 +10,13 @@ var grow = document.getElementById('grow');
 
 
 //create event listener for click
-grow.addEventListener('click', handleGrowTree);
+grow.addEventListener('click', inputValidation);
 
 //create event listener for enter key on input elements
 inputHeight.addEventListener('keypress', handleEnterKeyPress);
 inputSymbol.addEventListener('keypress', handleEnterKeyPress);
+
+
 
 
 //define function for enter key press
@@ -25,30 +24,35 @@ function handleEnterKeyPress (event) {
 
   //determine if enter key is pressed
   if ( event.keyCode === 13 ) {
-    //determine if each fields have a value, if not alert
-    if ( inputHeight.value === "" | inputSymbol.value === "" ) {
-      alert('Error: Both input fields need a value');
-
-      //if values are entered invoke grow tree function
-    } else {
-      handleGrowTree();
-    };
+    //envoke passTree to capture input data
+    inputValidation();
   }; //end of first condition for enter key
 };
 
-//define function to print tree to console
-function handleGrowTree() {
-
-  //determine if input fields have no value, if not alert
+//define function that tests if input fields are empty
+function inputValidation() {
+  //determine if input values are empty
   if ( inputHeight.value === "" | inputSymbol.value === "" ) {
     alert('Error: Both input fields need a value');
+  } else {
+    passTree();
   }
+};
 
+ function passTree() {
   //create variable to store height of tree
   tree.height = inputHeight.value;
 
   //create variable to store chacter from input
   tree.sym = inputSymbol.value;
+
+  //call handleGrowTree
+  handleGrowTree(tree);
+};
+
+
+//define function to print tree to console
+function handleGrowTree(tree) {
 
   //declare vars to hold spaces and a counter that decrements +1
   var spaces;
@@ -61,17 +65,17 @@ function handleGrowTree() {
   //create loop to log a tree with user height and character
   for (var i = 0; i < tree.height; i++) {
 
-      //repeats spaces === spaceCounter
-      spaces = ' '.repeat(spaceCounter);
-      //repeats character === characterCounter
-      character = tree.sym.repeat(characterCounter);
-      //decrements counter
-      spaceCounter--
-      //increments counter +2 for shape of tree
-      characterCounter = characterCounter + 2;
+    //repeats spaces === spaceCounter
+    spaces = ' '.repeat(spaceCounter);
+    //repeats character === characterCounter
+    character = tree.sym.repeat(characterCounter);
+    //decrements counter
+    spaceCounter--
+    //increments counter +2 for shape of tree
+    characterCounter = characterCounter + 2;
 
-      console.log(spaces + character);
+    console.log(spaces + character);
 
-    };//-----end for loop
+  };//-----end for loop
 
 };//-------end handleGrowTree function
